@@ -16,7 +16,8 @@ const observer = new MutationObserver((mutationsList) => {
                 let message_info = getUser(user);
                 if (common.anchor_fold_type_v2 === "1") {
                     message_info.message_type = "like";
-                    message_info.message_describe = `${message_info.user_nickName} 为主播点赞`;
+                    //message_info.message_describe = `${message_info.user_nickName} 为主播点赞`;
+                    message_info.message_describe = `为主播点赞`;
                 }
                 if (common.anchor_fold_type_v2 === "3") {
                     message_info.message_type = "join";
@@ -51,14 +52,16 @@ const chatObserverrom = new MutationObserver((mutationsList, observer) => {
                     message_info = {
                         message_type: "text",
                         content: payload.content,
-                        message_describe: `${userinfo.user_nickName} : ${payload.content}`,
+                        //message_describe: `${userinfo.user_nickName} : ${payload.content}`,
+                        message_describe: `${payload.content}`,
                     };
                     break
                 case 'WebcastEmojiChatMessage':
                     message_info = {
                         message_type: "text",
                         content: payload.content,
-                        message_describe: `${userinfo.user_nickName} : ${payload.default_content}`,
+                        //message_describe: `${userinfo.user_nickName} : ${payload.default_content}`,
+                        message_describe: `${payload.default_content}`,
                     };
                     break
             }

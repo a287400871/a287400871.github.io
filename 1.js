@@ -38,7 +38,7 @@ function getQueryString(name) {
     return null;
 }
 
-if (getQueryString("pause") === "true" ) {
+//if (getQueryString("pause") === "true" ) {
     //自动暂停一次播放
     var pauseIdx = setInterval(() => {
         let playbtn = document.querySelector(".xgplayer-play");
@@ -49,7 +49,7 @@ if (getQueryString("pause") === "true" ) {
         clearInterval(pauseIdx);
         console.log("已自动暂停播放");
     }, 500);
-}
+//}
 //------------------------------------------------------------------------------------
 
 

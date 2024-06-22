@@ -116,7 +116,7 @@ function getQueryString(name) {
     return null;
 }
 
-if (getQueryString("pause") === "true" || AUTOPAUSE === true) {
+if (getQueryString("pause") === "true") {
     //自动暂停一次播放
     var pauseIdx = setInterval(() => {
         let playbtn = document.querySelector(".xgplayer-play");

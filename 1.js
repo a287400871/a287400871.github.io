@@ -1,4 +1,4 @@
-// 创建一个按B事件
+// 创建一个按B事件.
 var event = new KeyboardEvent('keydown', {
     key: 'b',
     code: 'KeyB',

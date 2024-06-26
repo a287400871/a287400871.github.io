@@ -1,30 +1,49 @@
-var min = 96,    
-max = 106;
-var rand = Math.floor(Math.random() * (max - min + 1) + min); 
-console.log(rand);
-
-
-const simulatedEvent = new KeyboardEvent('keydown', {
-    key: 'Virtual_Alt',
-    keyCode: rand, //alt
-    bubbles: true,
-    cancelable: true
-});
-
-
-const targetElement = document.documentElement;
-
-// 设定时器，每隔60秒模拟一次按键事件
-setInterval(() => {
-    targetElement.dispatchEvent(simulatedEvent);
-}, rand * 600);
-
-// 订阅 keydown 事件 (Debug)
-targetElement.addEventListener('keydown', event => {
-    if (event.key == "Virtual_Alt") {
-        console.log('[防挂] 按了',rand,event.key);
-    }
-});
+// 创建一个函数来模拟按键事件  
+function simulateNumpadKey(keyChar) {  
+    if (typeof keyChar !== 'string' || keyChar.length === 0) {  
+        console.error('Invalid keyChar:', keyChar);  
+        return;  
+    }  
+  
+    // 创建一个新的键盘按键事件  
+    const simulatedEvent = new KeyboardEvent('keydown', {  
+        key: keyChar, // 按键的字符值  
+        // 注意：code 属性可能不被所有浏览器支持在 KeyboardEvent 构造函数中设置  
+        // code: 'Numpad' + keyChar, // 假设我们可以设置 code 属性，但通常这不是可行的  
+        bubbles: true,  
+        cancelable: true,  
+        view: window // 必须指定一个 view，通常是 window 对象  
+        // charCode 和 keyCode 已经是非标准属性，并且在现代浏览器中可能不被支持  
+        // charCode: keyChar.charCodeAt(0), // 对于旧版浏览器可能需要  
+        // keyCode: keyChar.charCodeAt(0) // 同样，对于旧版浏览器可能需要  
+    });  
+  
+    // 获取要分派事件的目标元素，例如文档的 body 元素  
+    //const targetElement = document.body;  
+    const targetElement = document.documentElement;
+    // 分派事件  
+    targetElement.dispatchEvent(simulatedEvent);  
+}  
+  
+// 创建一个数组包含小键盘的0-9数字  
+const numpadKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];  
+  
+// 设置定时器，每10秒模拟一个小键盘按键  
+let index = 0; // 用于跟踪要模拟的下一个键的索引  
+setInterval(() => {  
+    var min = 1,    
+	max = 9;
+	var rand = Math.floor(Math.random() * (max - min + 1) + min); 
+    console.log(rand);
+    
+    // 确保 index 在有效范围内  
+    index = index % numpadKeys.length;  
+    // 模拟按键事件  
+    simulateNumpadKey(numpadKeys[rand]);  
+  
+    // 更新索引以模拟下一个键  
+    index++;  
+}, 15000); // 10秒 = 10000毫秒
 
 /*禁止关闭 Websocket*/
 WebSocket.prototype.close = function () { return; }
@@ -206,8 +225,8 @@ function init() {
         console.log("服务器断开,请启动ws服务" + wsurl);
     };
     ws.onopen = () => {
-        console.log("连接ws成功:" + wsurl);
-       
+        console.log("2332连接ws成功:" + wsurl);
+        console.log("23欢迎加入 QQ 群 590109588：https://qm.qq.com/q/YAs31tGvUm");
         observer.observe(roomJoinDom, { childList: true });
         chatObserverrom.observe(chatDom, { childList: true });
     };

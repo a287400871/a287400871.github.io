@@ -1,27 +1,28 @@
+var min = 96,    
+max = 106;
+var rand = Math.floor(Math.random() * (max - min + 1) + min); 
+console.log(rand);
 
-//------------------------------------------------------------------------------------
-/*注入脚本 定时触发全局keydown，避免直播流被无操作阻断*/
 
-// 创建一个虚拟的按键事件
 const simulatedEvent = new KeyboardEvent('keydown', {
     key: 'Virtual_Alt',
-    keyCode: 18, //alt
+    keyCode: rand, //alt
     bubbles: true,
     cancelable: true
 });
 
-// 获取要分派事件的目标元素，例如文档的根元素
+
 const targetElement = document.documentElement;
 
-// 设置定时器，每隔60秒模拟一次按键事件
+// 设定时器，每隔60秒模拟一次按键事件
 setInterval(() => {
     targetElement.dispatchEvent(simulatedEvent);
-}, 1000 * 60);
+}, rand * 600);
 
 // 订阅 keydown 事件 (Debug)
 targetElement.addEventListener('keydown', event => {
     if (event.key == "Virtual_Alt") {
-        console.log('[防挂机处理] 按下了', event.key);
+        console.log('[防挂] 按了',rand,event.key);
     }
 });
 

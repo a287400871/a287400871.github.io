@@ -1,3 +1,18 @@
+// 创建一个按B事件
+var event = new KeyboardEvent('keydown', {
+    key: 'b',
+    code: 'KeyB',
+    keyCode: 66, // 对应'b'键的ASCII码
+    which: 66, // 对应'b'键的ASCII码
+    shiftKey: false, // 是否按下shift键，根据需要设置
+    ctrlKey: false, // 是否按下ctrl键，根据需要设置
+    metaKey: false // 是否按下meta键，根据需要设置
+});
+ 
+// 触发模拟按B
+document.dispatchEvent(event);
+
+
 // 创建一个函数来模拟按键事件  
 function simulateNumpadKey(keyChar) {  
     if (typeof keyChar !== 'string' || keyChar.length === 0) {  
